@@ -32,8 +32,8 @@ jobs:
                 name: "Archive docker image"
                 command: docker save -o image.tar gsindhwani/sample-capstone-app
             - persist_to_workspace:
-                root: .
-                paths: ./image.tar
+                root: ~/
+                paths: image.tar
     publish_docker_image:
         docker:
             - image: cimg/base:stable
@@ -41,11 +41,13 @@ jobs:
             - checkout
             - setup_remote_docker
             - attach_workspace:
-                at: .
+                at: ~/
+            - run:
+                name: "Load archived image"
+                command: docker load -i image.tar
             - run:
                 name: "Publish docker image to Docker Hub Repository"
-                command: |
-                    bash shell_scripts/upload_image.sh Ginny@2310
+                command: bash shell_scripts/upload_image.sh $DOCKER_HUB_PASS
                     
 workflows:
     default:
