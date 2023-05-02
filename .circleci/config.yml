@@ -37,7 +37,7 @@ jobs:
             - run:
                 name: "Publish docker image to Docker Hub Repository"
                 command: |
-                    bash shell_scripts/upload_image.sh "xyz"
+                    bash shell_scripts/upload_image.sh xyz
                     
 workflows:
     default:

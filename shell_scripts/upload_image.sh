@@ -1,13 +1,15 @@
-docker_password = $1
-echo $docker_password
+docker images
+
+echo "password: $1"
 
 dockerpath="gsindhwani/sample-capstone-app"
 
 # Authenticate & tag
-echo "Docker ID and Image: $dockerpath"
+echo "Dockerpath: $dockerpath"
+
 docker tag sample-capstone-app $dockerpath
 
-docker login -u "gsindhwani" --password
+docker login -u "gsindhwani" -p $1
 
 # Push image to a docker repository
 docker push $dockerpath
