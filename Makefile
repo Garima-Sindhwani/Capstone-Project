@@ -5,6 +5,8 @@ setup:
 install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
+	wget -O /.hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+    chmod +x /.hadolint	
 
 test:
 	#python -m pytest -vv --cov=myrepolib tests/*.py
@@ -12,6 +14,6 @@ test:
 
 lint:
 	pylint my_app/app.py
-	#hadolint Dockerfile
+	/.hadolint Dockerfile
 
 all: install lint test
