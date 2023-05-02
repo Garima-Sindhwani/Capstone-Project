@@ -17,8 +17,10 @@ jobs:
                     . ~/.capstoneenv/bin/activate
                     make lint
                     
-    workflows:
-        setup_env
+workflows:
+    default:
+        jobs:
+            - setup_env
                     
                 
             
