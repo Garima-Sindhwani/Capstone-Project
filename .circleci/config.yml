@@ -1,0 +1,21 @@
+jobs:
+    
+    setup_env:
+        docker:
+            - image: python:3.7.3-stretch
+        working_directory: ~/app
+        steps:
+            - checkout
+            - run:
+                name: "Install dependencies"
+                command: |
+                    python3 -m venv ~/.capstoneenv
+                    . ~/.capstoneenv/bin/activate
+            - run:
+                name: "Lint"
+                command: |
+                    . ~/.capstoneenv/bin/activate
+                    make lint
+                    
+                
+            
