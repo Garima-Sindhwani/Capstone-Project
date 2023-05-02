@@ -20,18 +20,29 @@ jobs:
                     make lint
     create_docker_image:
         docker:
-            - image: cimg/base:2022.06
+            - image: cimg/base:stable
         steps:
             - checkout
+            - setup_remote_docker
             - run:
                 name: "Create docker image"
                 command: |
-                    ./shell_scripts/run_docker.sh
+                    bash shell_scripts/build_image.sh
+    publish_docker_image:
+        docker:
+            - image: cimg/base:stable
+        steps:
+            - checkout
+            - setup_remote_docker
+            - run:
+                name: "Publish docker image to Docker Hub Repository"
+                command: |
+                    bash shell_scripts/upload_image.sh "xyz"
                     
 workflows:
     default:
         jobs:
-            - create_docker_image
+            - create_and_push_docker_image
                     
                 
             
