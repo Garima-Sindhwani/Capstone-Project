@@ -20,7 +20,7 @@ jobs:
                     make lint
     create_docker_image:
         docker:
-            - image: cimg/base:2022.06
+            - image: cimg/base:stable
         steps:
             - checkout
             - setup_remote_docker:
@@ -29,8 +29,7 @@ jobs:
                 name: "Create docker image"
                 command: |
                     ls
-                    docker build -t sample-app .
-                    docker images
+                    bash shell_scripts/run_docker.sh
                     
 workflows:
     default:
