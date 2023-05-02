@@ -23,26 +23,15 @@ jobs:
             - image: cimg/base:stable
         steps:
             - checkout
-            - setup_remote_docker
+            - setup_remote_docker:
+                version: 20.10.14
             - run:
                 name: "Create docker image"
                 command: |
-                    bash shell_scripts/build_image.sh
-    publish_docker_image:
-        docker:
-            - image: cimg/base:stable
-        steps:
-            - checkout
-            - setup_remote_docker
-            - run:
-                name: "Publish docker image to Docker Hub Repository"
-                command: |
-                    bash shell_scripts/upload_image.sh "xyz"
+                    ls
+                    bash shell_scripts/run_docker.sh
                     
 workflows:
     default:
         jobs:
-            - create_and_push_docker_image
-                    
-                
-            
+            - create_docker_image
