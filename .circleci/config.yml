@@ -26,7 +26,8 @@ jobs:
             - run:
                 name: "Create docker image"
                 command: |
-                    ./shell_scripts/run_docker.sh
+                    ls
+                    docker build -t sample-app .
                     
 workflows:
     default:
