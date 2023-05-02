@@ -28,20 +28,29 @@ jobs:
                 name: "Create docker image"
                 command: |
                     bash shell_scripts/build_image.sh
+            - run:
+                name: "Archive docker image"
+                command: docker save -o image.tar gsindhwani/sample-capstone-app
+            - persist_to_workspace:
+                root: .
+                paths: ./image.tar
     publish_docker_image:
         docker:
             - image: cimg/base:stable
         steps:
             - checkout
             - setup_remote_docker
+            - attach_workspace:
+                at: .
             - run:
                 name: "Publish docker image to Docker Hub Repository"
                 command: |
-                    bash shell_scripts/upload_image.sh xyz
+                    bash shell_scripts/upload_image.sh Ginny@2310
                     
 workflows:
     default:
         jobs:
+            - create_docker_image
             - publish_docker_image
                     
                 
