@@ -1,4 +1,5 @@
-version:2.1
+version: 2.1
+
 jobs:
     setup_env:
         docker:
@@ -11,6 +12,7 @@ jobs:
                 command: |
                     python3 -m venv ~/.capstoneenv
                     . ~/.capstoneenv/bin/activate
+                    make install
             - run:
                 name: "Lint"
                 command: |
