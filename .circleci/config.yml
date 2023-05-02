@@ -23,11 +23,14 @@ jobs:
             - image: cimg/base:2022.06
         steps:
             - checkout
+            - setup_remote_docker:
+                version: 20.10.14
             - run:
                 name: "Create docker image"
                 command: |
                     ls
                     docker build -t sample-app .
+                    docker images
                     
 workflows:
     default:
