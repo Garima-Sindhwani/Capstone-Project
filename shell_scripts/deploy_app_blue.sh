@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Get Nodes details
 /.kubectl get nodes
 
