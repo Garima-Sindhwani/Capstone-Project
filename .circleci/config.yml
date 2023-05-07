@@ -1,5 +1,9 @@
 version: 2.1
 
+orbs:
+    aws-eks: circleci/aws-eks@2.1
+    kubernetes: circleci/kubernetes@1.3
+
 jobs:
     build_app:
         docker:
@@ -47,13 +51,16 @@ jobs:
             - run:
                 name: "Publish docker image to Docker Hub Repository"
                 command: bash shell_scripts/upload_image.sh $DOCKER_HUB_PASS
+    create_kubernates_cluster:
+        docker:
+            - image: cimg/base:stable
+        
                     
 workflows:
     default:
         jobs:
-            - create_docker_image
-            - publish_docker_image:
-                requires: [create_docker_image]
+            - aws-eks/create-cluster:
+                cluster-name: my-eks-demo
                     
                 
             
