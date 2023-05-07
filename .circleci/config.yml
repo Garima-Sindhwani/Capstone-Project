@@ -60,9 +60,9 @@ jobs:
                 name: "Install kubernetes utilities"
                 command: make install_kubernetes_utility
             - aws-cli/setup:
-                aws-access-key-id: AKIA4Y2WNE4DASVGPE6A
-                aws-secret-access-key: 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
-                aws-region: us-east-1
+                aws-access-key-id: AWS_ACCESS_KEY
+                aws-secret-access-key: AWS_SECRET_KEY
+                aws-region: AWS_REGION
             - run:
                 name: "Create cluster"
                 command: bash shell_scripts/create_cluster.sh
