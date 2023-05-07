@@ -50,11 +50,7 @@ jobs:
                 command: docker load -i /tmp/workspace/image.tar
             - run:
                 name: "Publish docker image to Docker Hub Repository"
-                command: bash shell_scripts/upload_image.sh $DOCKER_HUB_PASS
-    create_kubernates_cluster:
-        docker:
-            - image: cimg/base:stable
-        
+                command: bash shell_scripts/upload_image.sh $DOCKER_HUB_PASS        
                     
 workflows:
     default:
