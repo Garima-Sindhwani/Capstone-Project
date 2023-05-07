@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
     aws-cli: circleci/aws-cli@2.0.6
-    aws-eks: circleci/aws-eks@2.2.0
     kubernetes: circleci/kubernetes@1.3
 
 jobs:
@@ -52,17 +51,26 @@ jobs:
             - run:
                 name: "Publish docker image to Docker Hub Repository"
                 command: bash shell_scripts/upload_image.sh $DOCKER_HUB_PASS
-                    
-workflows:
-    default:
-        jobs:
+    create_kubernetes_cluster:
+        docker:
+            - image: python:3.7.3-stretch
+        steps:
+            - checkout
+            - run:
+                name: "Install kubernetes utilities"
+                command: make install_kubernetes_utility
             - aws-cli/setup:
                 aws-access-key-id: AKIA4Y2WNE4DASVGPE6A
                 aws-secret-access-key: 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
                 aws-region: us-east-1
-            - aws-eks/create-cluster:
-                cluster-name: my-eks-demo
-                aws-profile: capstone_user
+            - run:
+                name: "Create cluster"
+                command: bash shell_scripts/create_cluster.sh
+                    
+workflows:
+    default:
+        jobs:
+            - create_kubernetes_cluster
                     
                 
             
