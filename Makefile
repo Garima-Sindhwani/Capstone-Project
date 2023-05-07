@@ -16,8 +16,8 @@ install_kubernetes_utility:
 	
 	# install kubectl
 	curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-	install -o root -g root -m 0755 kubectl /.kubectl
-	chmod +x /.kubectl
+	install -o root -g root -m 0755 kubectl /bin/kubectl
+	chmod +x /bin/kubectl
 
 test:
 	#python -m pytest -vv --cov=myrepolib tests/*.py
