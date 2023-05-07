@@ -57,6 +57,7 @@ workflows:
         jobs:
             - aws-eks/create-cluster:
                 cluster-name: my-eks-demo
+                aws-profile: capstone_user
                     
                 
             
