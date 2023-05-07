@@ -68,6 +68,9 @@ jobs:
                 command: bash shell_scripts/create_cluster.sh
     deploy_app:
         docker:
+            - image: python:3.7.3-stretch
+        steps:
+            - checkout
             - run:
                 name: "Install kubernetes utilities"
                 command: make install_kubernetes_utility
