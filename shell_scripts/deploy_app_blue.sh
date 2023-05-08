@@ -4,9 +4,9 @@
 /.kubectl get nodes
 
 # Create the deployment and loadbalancer
-# kubectl apply -f manifests/deploy_blue.yml
+/.kubectl apply -f manifests/deploy_blue.yml
 
 # # Get details for loadbalancer
-# kubectl get service/loadbalancer-service
+/.kubectl get service/loadbalancer-service
 # # Get details for deployment
-# kubectl get deploy,rs,svc,pods
+/.kubectl get deploy,rs,svc,pods
