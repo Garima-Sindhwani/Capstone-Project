@@ -9,4 +9,6 @@ else
     echo "Creating Cluster..."
     /.eksctl create cluster --name ${cluster_name} --region=${aws_region}
     echo "Cluster Created."
+    echo "Node Details:"
+    /.kubectl get nodes
 fi

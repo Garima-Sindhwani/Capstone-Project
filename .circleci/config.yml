@@ -80,12 +80,14 @@ jobs:
                 aws-region: AWS_REGION
             - run:
                 name: "Deploy application docker image (blue) on kubernetes cluster"
-                command: bash shell_scripts/deploy_app_blue.sh
+                command: |
+                    bash shell_scripts/deploy_app_blue.sh
 
                     
 workflows:
     default:
         jobs:
+            - create_kubernetes_cluster
             - deploy_app
                     
                 
