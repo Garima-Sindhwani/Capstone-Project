@@ -151,13 +151,20 @@ workflows:
     default:
         jobs:
             - build_app
+            - create_kubernetes_cluster:
+                requires: [build-app]
+                filters:
+                    branches:
+                        only: [master]
             - create_docker_image:
                 requires: [build_app]
+                filters:
+                    branches:
+                        only: [master]
             - publish_docker_image:
                 requires: [create_docker_image]
             - publish_updated_docker_image:
                 requires: [create_docker_image]
-            - create_kubernetes_cluster
             - deploy_app:
                 requires: [publish_docker_image, create_kubernetes_cluster]
             - check_deployment_status:
