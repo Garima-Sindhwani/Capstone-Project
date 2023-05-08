@@ -155,12 +155,12 @@ workflows:
                 requires: [build_app]
                 filters:
                     branches:
-                        only: [master]
+                        only: [main]
             - create_docker_image:
                 requires: [build_app]
                 filters:
                     branches:
-                        only: [master]
+                        only: [main]
             - publish_docker_image:
                 requires: [create_docker_image]
             - publish_updated_docker_image:
