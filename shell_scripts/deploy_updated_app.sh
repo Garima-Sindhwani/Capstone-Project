@@ -2,7 +2,7 @@
 
 # Create the deployment and loadbalancer
 echo "Deploy updated app:"
-/.kubectl set image deployment.apps/server  back-end=gsindhwani/sample-capstone-app-updated
+/.kubectl set image deployments/server  back-end=gsindhwani/sample-capstone-app-updated
 
 # # Get details for loadbalancer
 echo "Loadbalancer details:"

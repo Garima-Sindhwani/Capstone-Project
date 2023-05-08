@@ -79,10 +79,10 @@ jobs:
                 aws-secret-access-key: AWS_SECRET_KEY
                 aws-region: AWS_REGION
             - run:
-                name: "Deploy application docker image (blue) on kubernetes cluster"
+                name: "Deploy docker image on kubernetes cluster"
                 command: |
                     aws eks update-kubeconfig --region us-east-1 --name capstone-project
-                    bash shell_scripts/deploy_app_blue.sh
+                    bash shell_scripts/deploy_app.sh
     check_status:
         docker:
             - image: python:3.7.3-stretch
@@ -131,11 +131,26 @@ jobs:
                 command: |
                     aws eks update-kubeconfig --region us-east-1 --name capstone-project
                     bash shell_scripts/deploy_updated_app.sh
-                    
+    delete_cluster:
+        docker:
+            - image: python:3.7.3-stretch
+        steps:
+            - checkout
+            - run:
+                name: "Install kubernetes utilities"
+                command: make install_kubernetes_utility
+            - aws-cli/setup:
+                aws-access-key-id: AWS_ACCESS_KEY
+                aws-secret-access-key: AWS_SECRET_KEY
+                aws-region: AWS_REGION
+            - run:
+                name: "Check deploy on kubernetes cluster"
+                command: |
+                    /.eksctl delete cluster --region=us-east-1 --name=capstone-project
 workflows:
     default:
         jobs:
-            - deploy_updated_app
+            - delete_cluster
                     
                 
             

@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 # Get Nodes details
-echo "Node details:"
+echo "############### Node details ###############"
 /.kubectl get nodes
 
 # Create the deployment and loadbalancer
-echo "Deploy app:"
+echo "############### Deploy app ###############"
 /.kubectl apply -f manifests/deploy.yml
 
 # # Get details for loadbalancer
-echo "Loadbalancer details:"
+echo "############### Loadbalancer details ###############"
 /.kubectl get service/loadbalancer-service
 
 # # Get details for deployment
-echo "Deploy, Pod details:"
+echo "############### Deploy, RS, SVC, Pod details ###############"
 /.kubectl get deploy,rs,svc,pods
