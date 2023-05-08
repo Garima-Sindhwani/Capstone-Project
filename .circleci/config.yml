@@ -88,7 +88,8 @@ workflows:
     default:
         jobs:
             - create_kubernetes_cluster
-            - deploy_app
+            - deploy_app:
+                requires: [create_kubernetes_cluster]
                     
                 
             
