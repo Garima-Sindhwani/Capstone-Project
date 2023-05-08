@@ -100,11 +100,25 @@ jobs:
                 command: |
                     aws eks update-kubeconfig --region us-east-1 --name capstone-project
                     /.kubectl get deploy,rs,svc,pods
+    publish_updated_docker_image:
+        docker:
+            - image: cimg/base:stable
+        steps:
+            - checkout
+            - setup_remote_docker
+            - attach_workspace:
+                at: /tmp/workspace
+            - run:
+                name: "Load archived image"
+                command: docker load -i /tmp/workspace/image.tar
+            - run:
+                name: "Publish docker image to Docker Hub Repository"
+                command: bash shell_scripts/upload_updated_image.sh $DOCKER_HUB_PASS
                     
 workflows:
     default:
         jobs:
-            - check_status
+            - publish_updated_docker_image
                     
                 
             
