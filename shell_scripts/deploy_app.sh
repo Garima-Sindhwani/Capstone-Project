@@ -6,7 +6,7 @@ echo "Node details:"
 
 # Create the deployment and loadbalancer
 echo "Deploy app:"
-/.kubectl apply -f manifests/deploy_green.yml
+/.kubectl apply -f manifests/deploy.yml
 
 # # Get details for loadbalancer
 echo "Loadbalancer details:"

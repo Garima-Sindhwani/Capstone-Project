@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-# Get Nodes details
-echo "Node details:"
-/.kubectl get nodes
-
 # Create the deployment and loadbalancer
-echo "Deploy app:"
-/.kubectl apply -f manifests/deploy_blue.yml
+echo "Deploy updated app:"
+/.kubectl set image deployment.apps/server  back-end=gsindhwani/sample-capstone-app-updated
 
 # # Get details for loadbalancer
 echo "Loadbalancer details:"

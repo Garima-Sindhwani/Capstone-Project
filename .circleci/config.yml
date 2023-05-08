@@ -127,10 +127,10 @@ jobs:
                 aws-secret-access-key: AWS_SECRET_KEY
                 aws-region: AWS_REGION
             - run:
-                name: "Deploy application docker image (green) on kubernetes cluster"
+                name: "Deploy updated docker image on kubernetes cluster"
                 command: |
                     aws eks update-kubeconfig --region us-east-1 --name capstone-project
-                    bash shell_scripts/deploy_app_green.sh
+                    bash shell_scripts/deploy_updated_app.sh
                     
 workflows:
     default:
