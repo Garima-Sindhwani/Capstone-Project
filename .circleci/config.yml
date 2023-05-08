@@ -114,13 +114,28 @@ jobs:
             - run:
                 name: "Publish docker image to Docker Hub Repository"
                 command: bash shell_scripts/upload_updated_image.sh $DOCKER_HUB_PASS
+    deploy_updated_app:
+        docker:
+            - image: python:3.7.3-stretch
+        steps:
+            - checkout
+            - run:
+                name: "Install kubernetes utilities"
+                command: make install_kubernetes_utility
+            - aws-cli/setup:
+                aws-access-key-id: AWS_ACCESS_KEY
+                aws-secret-access-key: AWS_SECRET_KEY
+                aws-region: AWS_REGION
+            - run:
+                name: "Deploy application docker image (green) on kubernetes cluster"
+                command: |
+                    aws eks update-kubeconfig --region us-east-1 --name capstone-project
+                    bash shell_scripts/deploy_app_green.sh
                     
 workflows:
     default:
         jobs:
-            - create_docker_image
-            - publish_updated_docker_image:
-                requires: [create_docker_image]
+            - deploy_updated_app
                     
                 
             
