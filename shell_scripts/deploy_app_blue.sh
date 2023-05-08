@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
 # Get Nodes details
+echo "Node details:"
 /.kubectl get nodes
 
 # Create the deployment and loadbalancer
-#/.kubectl apply -f manifests/deploy_blue.yml
+echo "Deploy app:"
+/.kubectl apply -f manifests/deploy_blue.yml
 
 # # Get details for loadbalancer
-#/.kubectl get service/loadbalancer-service
+echo "Loadbalancer details:"
+/.kubectl get service/loadbalancer-service
+
 # # Get details for deployment
-#/.kubectl get deploy,rs,svc,pods
+echo "Deploy, Pod details:"
+/.kubectl get deploy,rs,svc,pods
