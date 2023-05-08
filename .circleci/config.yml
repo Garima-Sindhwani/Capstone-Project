@@ -118,6 +118,7 @@ jobs:
 workflows:
     default:
         jobs:
+            - create_docker_image
             - publish_updated_docker_image
                     
                 
