@@ -83,7 +83,7 @@ jobs:
                 command: |
                     aws eks update-kubeconfig --region us-east-1 --name capstone-project
                     bash shell_scripts/deploy_app.sh
-    check_status:
+    check_deployment_status:
         docker:
             - image: python:3.7.3-stretch
         steps:
@@ -144,13 +144,26 @@ jobs:
                 aws-secret-access-key: AWS_SECRET_KEY
                 aws-region: AWS_REGION
             - run:
-                name: "Check deploy on kubernetes cluster"
+                name: "Delete kubernetes cluster"
                 command: |
                     /.eksctl delete cluster --region=us-east-1 --name=capstone-project
 workflows:
     default:
         jobs:
-            - delete_cluster
+            - build_app
+            - create_docker_image:
+                requires: [build_app]
+            - publish_docker_image:
+                requires: [create_docker_image]
+            - publish_updated_docker_image:
+                requires: [create_docker_image]
+            - create_kubernetes_cluster
+            - deploy_app:
+                requires: [publish_docker_image, create_kubernetes_cluster]
+            - check_deployment_status:
+                requires: [deploy_app]
+            - deploy_updated_app:
+                requires: [publish_updated_docker_image, deploy_app]
                     
                 
             
