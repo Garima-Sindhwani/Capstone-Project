@@ -81,6 +81,7 @@ jobs:
             - run:
                 name: "Deploy application docker image (blue) on kubernetes cluster"
                 command: |
+                    aws eks update-kubeconfig --region us-east-1 --name capstone-project
                     bash shell_scripts/deploy_app_blue.sh
 
                     
