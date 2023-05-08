@@ -1,5 +1,17 @@
-deploy_name=/.kubectl get deployment -o=name
-echo "deploy name: $deploy_name"
-updated_dockerpath="gsindhwani/sample-capstone-app-updated"
+#!/usr/bin/env bash
 
-/.kubectl set image deployments/${deploy_name} back-end=${updated_dockerpath}
+# Get Nodes details
+echo "Node details:"
+/.kubectl get nodes
+
+# Create the deployment and loadbalancer
+echo "Deploy app:"
+/.kubectl apply -f manifests/deploy_green.yml
+
+# # Get details for loadbalancer
+echo "Loadbalancer details:"
+/.kubectl get service/loadbalancer-service
+
+# # Get details for deployment
+echo "Deploy, Pod details:"
+/.kubectl get deploy,rs,svc,pods
