@@ -1,4 +1,4 @@
-deploy_name=/.kubectl get deploy -o=name
+deploy_name=/.kubectl get deployment -o=name
 echo "deploy name: $deploy_name"
 updated_dockerpath="gsindhwani/sample-capstone-app-updated"
 
